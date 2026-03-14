@@ -1,0 +1,11 @@
+streamlit
+pandas
+plotly
+numpy
+streamlit-option-menu
+gspread
+oauth2client
+python-dotenv
+google-auth
+google-auth-oauthlib
+google-auth-httplib2

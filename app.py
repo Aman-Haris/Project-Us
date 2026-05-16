@@ -791,9 +791,9 @@ if view == "dashboard":
         m3.metric("📍 To Visit",      to_visit_cnt)
         m4.metric("🏙️ Cities",        unique_cities)
         if 'Estimated Cost' in visited_df.columns:
-            m5.metric("💸 Est. Spent", f"₹{visited_df['Estimated Cost'].sum():,.0f}")
+            m5.metric("💸 Total Spent", f"₹{visited_df['Total Cost'].sum():,.0f}")
         else:
-            m5.metric("💸 Est. Spent", "N/A")
+            m5.metric("💸 Total Spent", "N/A")
         if 'Estimated Cost' in to_visit_df.columns:
             m6.metric("💰 Planned",    f"₹{to_visit_df['Estimated Cost'].sum():,.0f}")
         else:
@@ -1030,9 +1030,6 @@ elif view == "to_visit":
                         if row.get('Ideal For'):
                             st.markdown(f"**👥 Ideal For:** {row['Ideal For']}")
 
-                        if row.get('Added By'):
-                            st.markdown(f"**🙋 Added By:** {row['Added By']}")
-
                         if row.get('Best Time to Visit'):
                             st.markdown(f"**🗓️ Best Time:** {row['Best Time to Visit']}")
 
@@ -1103,14 +1100,14 @@ elif view == "visited":
                 with st.expander(f"✅  {name}  —  {cat}"):
                     d1, d2 = st.columns([2, 1])
                     with d1:
-                        st.markdown(f"**🗂️ Category:** {cat or 'N/A'}")
                         st.markdown(f"**🏙️ City:** {row.get('City', 'N/A')}")
+                        st.markdown(f"**📍 Location:** {row.get('Location', 'N/A')}")
                         if row.get('Date Visited'):
                             dv = row['Date Visited']
                             date_str = dv.strftime("%d %b %Y") if hasattr(dv, 'strftime') else str(dv)
                             st.markdown(f"**📅 Date Visited:** {date_str}")
-                        if row.get('Notes'):
-                            st.markdown(f"**📝 Notes:** {row['Notes']}")
+                        st.markdown(f"**💰 Total Cost:** {row.get('Total Cost', 'N/A')}")
+                        st.markdown(f"**🤔 Revist Worthy:** {row.get('Revisit Worthy', 'N/A')}")
 
                     with d2:
                         r_aman = row.get('Rating (Aman)', 0)
@@ -1123,8 +1120,7 @@ elif view == "visited":
                             st.markdown(f"**Sandra's Rating:** {star_rating(r_sandra)} ({float(r_sandra):.1f})")
                         else:
                             st.markdown("**Sandra's Rating:** *Not rated yet*")
-
-
+                        st.markdown(f"**🥰 Memory:** {row.get('Memory', 'N/A')}")
 
 
 # ── Footer ────────────────────────────────────────────────────────────────────
